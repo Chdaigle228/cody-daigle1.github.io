@@ -33,3 +33,5 @@
 1) git add -A
 2) git commit -m "create description of commit"
 3) git push
+
+Token: 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
