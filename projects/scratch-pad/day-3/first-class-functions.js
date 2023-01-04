@@ -13,7 +13,13 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    return function(value){
+        if(value > base){
+            return true;
+        }else {
+            return false;
+        }
+    }
     
     
     
@@ -27,7 +33,13 @@ function createGreaterThanFilter(base) {
  */
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    return function(value){
+        if(value < base){
+            return true;
+        }else {
+            return false;
+        }
+    }
     
     
     
@@ -41,7 +53,11 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    
+    return function(char){
+        //check for case sensativity
+        return char.toUpperCase()[0] === startsWith.toUpperCase();
+        
+    }
     
     
     
@@ -55,7 +71,11 @@ function createStartsWithFilter(startsWith) {
  */
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
-    
+    return function(char){
+        //slice to get item at last index
+        return char.toUpperCase().slice(-1) === endsWith.toUpperCase();
+        
+    }
     
     
     
@@ -71,7 +91,8 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
-    
+   //use map to create new array
+    return strings.map(modify)
     
     
     
@@ -79,7 +100,7 @@ function modifyStrings(strings, modify) {
 }
 
 /** 
- * Given an Array of Strings and a Function designed to test the String in some 
+ * Given an Array of Strings and a Function designed to test the String in some <-- hint to use the some() function?
  * way and return a Boolean on whether it passed, return true if ALL Strings pass the test.
  * 
  * Imagine you had a list of names, and you wanted to test they all 
@@ -89,7 +110,12 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    
+    //some method to loop through
+    var fail = strings.some((names) => {
+        return !test(names)
+    });
+    //return the opposite of the some in order to return true
+    return !fail
     
     
     

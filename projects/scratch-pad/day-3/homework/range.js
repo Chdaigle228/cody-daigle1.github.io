@@ -23,7 +23,18 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
-    
+    //create collection
+    let nums = [];
+    //iterate over whatever the numbers are
+    if (start > end){
+        for (let i = start; i >= end; i--){
+            nums.push(i);
+        }
+    } else {
+        for (let i = start; i <= end; i++){
+            nums.push(i);
+        } 
+    } return nums;
     
     
     
