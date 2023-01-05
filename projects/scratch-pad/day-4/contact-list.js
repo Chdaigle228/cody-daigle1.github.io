@@ -35,7 +35,12 @@
 
 // YOUR CODE GOES BELOW HERE //
 function makeContact(id, nameFirst, nameLast) {
-
+    //create object 'template' for contact info
+    return {
+        id: id,
+        nameFirst: nameFirst,
+        nameLast: nameLast
+    };
 } 
 
 
@@ -43,15 +48,54 @@ function makeContactList() {
     /*
      * You need something here to hold contacts. See length api for a hint:
      */
-    var contacts;
+    var contacts = [];
     
     return {
         // we implemented the length api for you //
         length: function() {
             return contacts.length;
+        },
+        addContact: function(contact){
+            //push contact to contacts array
+            contacts.push(contact);
+        },
+        findContact: function(fullName){
+            //iterate over contacts list
+          for(var i = 0; i < contacts.length; i++){
+            //check if fullName matches
+            if(fullName === contacts[i]['nameFirst'] + ' ' + contacts[i]['nameLast']){
+                //return that contact
+                return contacts[i];
+            }
+          }
+        },
+        removeContact: function(contact){
+            //iterate over contact objects
+            for(var i = 0; i < contacts.length; i++){
+                //check if contact is in the contacts
+                if(contacts[i] === contact){
+                    //slice contact at index 
+                    return contacts.splice(i, 1);
+                }
+              }
+            },
+            printAllContactNames: function(){
+                //empty string to list contacts
+                    var contact = '';
+                //iterate over contacts list
+                    for(var i = 0; i < contacts.length; i++){
+                 //check if full name is the last one
+                if(i === contacts.length - 1){
+                 //if false name does not get a line break
+                    contact += contacts[i]['nameFirst'] + ' ' + contacts[i]['nameLast']
+                 //if true then log the last name with line break, just need to remember how it works
+                }else{
+                    contact += contacts[i]['nameFirst'] + ' ' + contacts[i]['nameLast'] + '\n';
+                }
+            }return contact;
+            }
+          } 
         }
-    }
-}
 
 
 
