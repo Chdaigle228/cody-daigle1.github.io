@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 function objectValues(object) {
-
+return Object.values(object);
 } 
 
 //////////////////////////////////////////////////////////////////////
@@ -11,7 +11,8 @@ function objectValues(object) {
 //////////////////////////////////////////////////////////////////////
 
 function keysToString(object) {
-
+    var str = Object.keys(object);
+    return str.join(' ')
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -19,23 +20,39 @@ function keysToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function valuesToString(object) {
-    
+var arr = [];
+    for(var key in object){
+      if(typeof object[key] === 'string'){
+        arr.push(object[key])
+        }var newStr = arr.join(' ')
+    }return newStr
 }
+//     var arr = [];
+//     var str = Object.values(object);
+//     if(typeof str === 'string'){
+//        arr.push(str)
+//     } 
+//     var newStr = arr.join(' ');
+//     return newStr
+// }
 
 //////////////////////////////////////////////////////////////////////
 // Function 4 - Array or Object //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 function arrayOrObject(collection) {
-    
-}
+   if(Array.isArray(collection)){
+    return "array"
+    }
+    return "object"
+   }
 
 //////////////////////////////////////////////////////////////////////
 // Function 5 - Capitalize Word //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeWord(string) {
-    
+ return string[0].toUpperCase() + string.substring(1)
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -43,7 +60,12 @@ function capitalizeWord(string) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeAllWords(string) {
-    
+    var arr = string.split(' ');
+    for(let i = 0; i < arr.length; i++){
+       arr[i] = arr[i][0].toUpperCase() + arr[i].substring(1)
+      
+    }  return arr.join(' ')
+   
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -51,24 +73,36 @@ function capitalizeAllWords(string) {
 //////////////////////////////////////////////////////////////////////
 
 function welcomeMessage(object) {
-
+return "Welcome " + object.name[0].toUpperCase() + object.name.substring(1) + '!'
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 8 - Profile Info /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
+// Should take an object with a name an a species and return '<Name> is a <Species>'"
 function profileInfo(object) {
-
+    var name = object.name[0].toUpperCase() + object.name.substring(1)
+    var species = object.species[0].toUpperCase() + object.species.substring(1)
+    return name + ' is a ' + species
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 9 - Maybe Noises /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//Should take an object, if this object has a noises array return them as a string separated 
+//by a space, if there are no noises return 'there are no noises'"
 
 function maybeNoises(object) {
-
+    if(Array.isArray(object.noises) && object.noises.length > 0){
+        return object['noises'].join(' ');
+    }
+    return 'there are no noises';
 }
+// if(object.hasOwnProperty(noises)){
+//     return noises.join(' ')
+//     }
+//     return "there are no noises"
+// }
 
 //////////////////////////////////////////////////////////////////////
 // Function 10 - Has Words ///////////////////////////////////////////
