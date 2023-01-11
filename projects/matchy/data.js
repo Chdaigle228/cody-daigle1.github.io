@@ -152,11 +152,9 @@ console.log(animal);
  //data structure array becuase I feel most comfortable with them
  var friends = [];
  function getRandom(max){
-  for (let i = 0; i <= max.length; i++){
-return Math.floor(Math.random() * friends.length);
-  }
+  return Math.floor(Math.random() * max.length);
  } 
-
+animal['friends'] = friends
 
 /**
  * Nice work! You're done Part 1. Pat yourself on the back and
