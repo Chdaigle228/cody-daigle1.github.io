@@ -47,7 +47,7 @@ function search(array, string){
     //iterate through animals array of objects
     for(let i = 0; i < array.length; i++){ // don't need to equal length, need index
         //check if name exists in array of objects
-        if(string === array[i].name){ // <- if string is (loosely) equal to the name property in each object
+        if(string === array[i].name){ // <- if string is strictly equal to the name property in each object
             //return animal object
             return array[i]; //<- returns the animals object
             //else, return null
