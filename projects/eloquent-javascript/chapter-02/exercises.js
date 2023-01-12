@@ -4,23 +4,54 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 function triangles() {
-
+  for (let i = "#"; i.length < num; i += "#")
+  console.log(i)
+  
 }
+//console.log(triangles(num))
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function fizzBuzz() {
+function fizzBuzz() { 
+ 
+  for(let i = 1; i <= 15; i++){//<- exercise says 100...
+    var words = '';
+    if(i % 3 === 0) words += 'fizz';
+    if(i % 5 === 0) words += 'buzz';
+    console.log(words || i)
+  }
   
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // drawChessboard //////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
-function drawChessboard() {
-
+/**
+ * for loop and a nested for loop
+ * got create one to iterate down and another iterate accross
+ * 
+ * if even then add 'space' and if odd add #
+ * both for loops need to determine even and odd
+ */
+function drawChessboard(x) {
+  let board = []; //where each value reps a row
+  for(let i =0; i < x; i++){ //  creates the row
+    let row = ' ';
+    for(let r = 0; r < x; r++){ //creates the length
+      //turn empty string of row to '# # " || " # #"
+      if ((i + r) % 2 ===0){
+        row += '';
+      }else{
+        row += '#';
+      } //need to push row into the new array
+    }
+    board.push(row);
+  }
+  console.log(board.join('\n'));
 }
+
+console.log(drawChessboard(8));
 
 ////////////////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////

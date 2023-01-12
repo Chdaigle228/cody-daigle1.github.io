@@ -107,41 +107,78 @@ function maybeNoises(object) {
 //////////////////////////////////////////////////////////////////////
 // Function 10 - Has Words ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//Should take a string of words and a word and return true if <word> is in <string of words>, otherwise return false."
 
 function hasWord(string, word) {
-
+if(string.includes(word)){
+    return true;
+    } else{
+        return false
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 11 - Add Friend //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//Should take a name and an object and add the name to the object's friends array then return the object"
 
 function addFriend (name, object) {
-
+object['friends'].push(name);
+return object;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 12 - Is Friend ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function isFriend(name, object) {
+//Should take a name and an object and return true if <name> is a friend of <object> and false otherwise"
 
+function isFriend(name, object) {
+    if(Object.hasOwn(object, 'friends') && object['friends'].includes(name)){
+        return true;
+    }
+    return false;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 13 - Non-Friends /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function nonFriends(name, array) {
+//Should take a name and a list of people, and return a list of all the names that <name> is not friends with"
 
+function nonFriends(name, array) {
+    //create empty array to put not friends in
+    var enemy = []; 
+    //loop through array of objects
+    for (var i = 0; i < array.length; i++) {
+        //create variable for friend
+        var isFriends = false;
+        //check if the input is the same as a name within the array of objects
+        if (name !== array[i].name){
+            //loop over the friends array in each object
+            for (var f = 0; f < array[i]['friends'].length; f++){
+                //check if they are friends with the input
+                if (array[i].friends[f] === name){
+                    isFriends = true;
+                } 
+            }
+            //outside of loop for friends check if isFriends is not true so it can be pushed
+            if (!isFriends) enemy.push(array[i].name);
+        }
+    }
+    return enemy;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function updateObject(object, key, value) {
+//Should take an object, a key and a value. Should update the property <key> on <object> with new <value>. 
+//If <key> does not exist on <object> create it."
 
+function updateObject(object, key, value) {
+    for(key in object){
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
