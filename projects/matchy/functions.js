@@ -99,17 +99,42 @@ var replace = function(animals, name, replacement){
         //check if name exists in the array of objects
         if(name === animals[i].name){
             //if it does then delete it
-            delete animals[i]
+            return animals.splice(animals[i])
             //else it does not
         }
-    }
+    } 
  }
 
 
 //////////////////////////////////////////////////////////////////////
 // Step 4 - Add ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
+/**
+ * ## Step 4 - Add
+ 1. Write a function declaration called `add` with a signature of `add(animals, animal) { //... }` that:
+   - Takes 2 parameter, an Array of animals, and an Object representing a new animal to be added.
+   - Checks that the animal Object has a `name` property with a length > 0.
+   - Checks that the animal Object has a `species` property with a length > 0.
+   - Has a **unique** name, meaning no other animals have that name.
+   - Adds this new Object to the `animals` Array, **only** if all the other conditions pass.
+   - Make sure it works.
+ */
+//animal is an object
+// animals is an array objects
+function add(animals, animal){
+    //loop through animals array of objects
+    for(let i = 0; i < animals.length; i++){
+        //check if the name exists within the entire array first
+        if(animal.name === animals[i].name){
+            return animals
+          }
+        } 
+     if(animal.name.length > 0){
+        if(animal.species.length > 0){
+          animals.push(animal)
+      }
+    }
+   }
 
 
 /**
