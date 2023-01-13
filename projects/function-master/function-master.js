@@ -25,16 +25,10 @@ var arr = [];
       if(typeof object[key] === 'string'){
         arr.push(object[key])
         }var newStr = arr.join(' ')
-    }return newStr
+    }
+    return newStr
 }
-//     var arr = [];
-//     var str = Object.values(object);
-//     if(typeof str === 'string'){
-//        arr.push(str)
-//     } 
-//     var newStr = arr.join(' ');
-//     return newStr
-// }
+
 
 //////////////////////////////////////////////////////////////////////
 // Function 4 - Array or Object //////////////////////////////////////
@@ -177,25 +171,41 @@ function nonFriends(name, array) {
 //If <key> does not exist on <object> create it."
 
 function updateObject(object, key, value) {
-    for(key in object){
-    }
+    object[key] = value
+    return object 
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 15 - Remove Properties ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function removeProperties(object, array) {
+//Should take an object and an array of strings. Should remove any properties on <object> that are listed in <array>"
 
-}
+function removeProperties(object, array) {
+    //loop through array
+    for(let i = 0; i < array.length; i++){
+        if(object.hasOwnProperty(array[i])){
+            delete object[array[i]]
+      }
+    } return object
+  }
 
 //////////////////////////////////////////////////////////////////////
 // Function 16 - Dedup ///////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function dedup(array) {
+//Should take an array and return an array with all the duplicates removed"
 
+function dedup(array) {
+    let arr = [...new Set(array)]
+    return arr
 }
+
+/*
+let noDups = array.filter((ele, index) => {
+    return array.indexOf(ele) === index;
+});
+*/
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
