@@ -202,8 +202,11 @@ function dedup(array) {
 }
 
 /*
-let noDups = array.filter((ele, index) => {
-    return array.indexOf(ele) === index;
+let uniqueChars = [];
+array.forEach((c) => {
+    if (!uniqueChars.includes(c)) {
+        uniqueChars.push(c);
+    }
 });
 */
 

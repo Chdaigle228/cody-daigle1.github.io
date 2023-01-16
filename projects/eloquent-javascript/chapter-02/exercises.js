@@ -3,11 +3,14 @@
 // triangles ///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function triangles() {
-  for (let i = "#"; i.length < num; i += "#")
-  console.log(i)
-  
+function triangles(max) {
+  var triangle = '';
+ for(var i = 1; i <= max; i++){
+    triangle += '#'
+    console.log(triangle)
+ }
 }
+
 //console.log(triangles(num))
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
@@ -34,24 +37,26 @@ function fizzBuzz() {
  * if even then add 'space' and if odd add #
  * both for loops need to determine even and odd
  */
-function drawChessboard(x) {
-  let board = []; //where each value reps a row
-  for(let i =0; i < x; i++){ //  creates the row
-    let row = ' ';
-    for(let r = 0; r < x; r++){ //creates the length
-      //turn empty string of row to '# # " || " # #"
-      if ((i + r) % 2 ===0){
-        row += '';
-      }else{
-        row += '#';
-      } //need to push row into the new array
-    }
-    board.push(row);
-  }
-  console.log(board.join('\n'));
+function drawChessboard(size) {
+  var string = '';
+  for(var i = 0; i < size; i++){
+    for(var r = 0; r < size; r++){
+      if((r + (i % 2)) % 2){
+        string += '#';
+      } else {
+        string += ' ';
+      }
+    }  
+ 
+      string += '\n';
+   
+  } console.log(string);
+ 
+ 
 }
 
-console.log(drawChessboard(8));
+
+//console.log(drawChessboard(4));
 
 ////////////////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
