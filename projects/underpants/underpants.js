@@ -21,6 +21,10 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function(value){
+    //return value unchanged
+    return value
+};
 
 /** _.typeOf
 * Arguments:
@@ -42,6 +46,27 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeOf = function(value){
+    if(Array.isArray(value)){
+        return "array"
+    }else if(typeof(value) === "string"){
+        return "string";
+    }else if(typeof(value) === typeof(true)){
+        return "boolean"
+    } else if(typeof(value) === typeof(4)){
+        return "number"
+    } else if(value === null){
+        return "null"
+    } else if(typeof(value) === typeof notavalue){
+        return "undefined"
+    } else if(typeof value === typeof function (){} ){
+        return "function";
+    } else if(typeof value === typeof {}){
+        return 'object'
+    }
+    return value
+}
+
 
 /** _.first
 * Arguments:
@@ -60,6 +85,27 @@ var _ = {};
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+
+_.first = function(array, num){
+    //empty array to store result
+    var arr = [];
+    //determine if array or not
+    if(!Array.isArray(array)){
+        return [];
+        //determine if num exists
+        }if(num === false || typeof num !== typeof 5){
+            //if not return first item in array
+            return array[0];
+      }//iterate through num
+      for(var i = 0; i < num; i++){
+        //push new items in arr
+            arr.push(array[i]);
+    }//determine if num is > array length
+    if(num > array.length){
+            return array;
+  } return arr;
+}
+
 
 
 /** _.last
@@ -80,6 +126,25 @@ var _ = {};
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function(array, num){
+    //determine if array is an array
+    if(!Array.isArray(array)){
+    //return empty array
+        return [];
+    //determine if number is not given
+    }if(num === undefined){
+    //return last element
+        return array[array.length - 1];
+    //determine if number is greater than the arrays length
+    }if(num > array.length){
+        return array;
+    //determine if number is a negative number
+    }if(num < 0){
+    //return empty array
+        return [];
+    //return array sliced
+    }return array.slice(1);
+}
 
 /** _.indexOf
 * Arguments:
@@ -129,6 +194,20 @@ var _ = {};
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+_.each = function(collection, func){
+    if(Array.isArray(collection)){
+        //iterate through array
+        for(let a = 0; a < collection.length; a++){
+            //call function on each element passing the ele, its index, and the collection itself
+           func(collection[a], a, collection)
+        }
+    } else {
+        for(let key in collection){
+            //invoke function on current value, key, and collection
+            func(collection[key], key, collection);
+        }
+    }
+}
 
 
 /** _.unique
@@ -158,6 +237,13 @@ var _ = {};
 *   use _.each in your implementation
 */
 
+_.filter = function(array, func){
+    var arr = [];
+    for(let i = 0; i < array.length; i++){
+        func(array[i], i, array) ? arr.push(array[i]) : null
+        }
+   return arr;
+}
 
 /** _.reject
 * Arguments:
@@ -172,6 +258,13 @@ var _ = {};
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(array, func){
+    var arr = [];
+    for(let i = 0; i < array.length; i++){
+        !func(array[i], i, array) ? arr.push(array[i]) : null
+        }
+   return arr;
+}
 
 /** _.partition
 * Arguments:
@@ -191,6 +284,14 @@ var _ = {};
 *   }); -> [[2,4],[1,3,5]]
 }
 */
+
+_.partition = function(array, func){
+    var truthy = [];
+    var falsy = [];
+    for(let i = 0; i < array.length; i++){
+        func(array[i], i, array) ? truthy.push(array[i]) : falsy.push(array[i])
+    } return [truthy, falsy]
+}
 
 
 /** _.map
