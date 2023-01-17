@@ -234,10 +234,15 @@ _.each = function(collection, func){
 */
 
 _.unique = function(array){
-    //use set to return new array without dups
-   var noDup = [...new Set(array)]
-   return noDup;
+    const noDup = array.filter((element, index) => {
+        return array.indexOf(element) === index;
+    });
+    return noDup
 }
+    //use set to return new array without dups
+//    var noDup = [...new Set(array)]
+//    return noDup;
+// }
 
 /** _.filter
 * Arguments:
@@ -359,7 +364,13 @@ _.map = function(collection, func){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
-
+//array is an array of objects
+_.pluck = function(array, prop){
+var plucked = array.map(function(arr){
+    return arr[prop]
+    })
+    return plucked
+}
 
 /** _.every
 * Arguments:
@@ -381,6 +392,43 @@ _.map = function(collection, func){
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+
+_.every = function(collection, func){
+         if(Array.isArray(collection)){
+            //check if noi function passed in
+            if(func === undefined){ //<-- meaning it has nothing passed into it
+                for(let i = 0; i < collection.length; i++){
+                    if(!collection[i]){ //check if NOT truthy
+                        return false;
+                    }
+                }
+            }else{
+                for(let i = 0; i < collection.length; i++){
+                    //check if result of invoking func is truethy/falsey\
+                    if(func(collection[i], i, collection) === false){
+                        return false;
+                    }
+                }
+            }
+            //else it's an object
+        } else{ 
+            if(Array.isArray(collection)){
+                for(let i = 0; i < collection.length; i++){
+                    if(func(collection[i], i, collection) === false){
+                        return false;
+                    }
+                }
+            } else{
+                for(let key in collection){
+                    if(func(collection[key], key, collection) === false){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
 
 
 /** _.some
@@ -404,6 +452,40 @@ _.map = function(collection, func){
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function(collection, func){
+    //call func if its an array
+    if(func === undefined ){
+        if(Array.isArray(collection)){
+            for(let i = 0; i < collection.length; i++){
+                if(collection[i] === true){
+                    return true;
+                }
+            }
+        } else {
+            for(let key in collection){
+                if(collection[key] === true){
+                    return true;
+                }
+            }
+        }
+    } else{ 
+        if(Array.isArray(collection)){
+            for(let i = 0; i < collection.length; i++){
+                if(func(collection[i], i, collection) === true){
+                    return true;
+                }
+            }
+        } else{
+            for(let key in collection){
+                if(func(collection[key], key, collection) === true){
+                    return true;
+                }
+            }
+        }
+    }
+    
+    return false;
+    }
 
 /** _.reduce
 * Arguments:
@@ -424,6 +506,28 @@ _.map = function(collection, func){
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+_.reduce = function(array, func, seed){
+    var result;
+    //check if seed is defined
+    if(seed === undefined){
+        //force seed to default to 0 index
+        result = array[0];
+        //loop through array for indexs
+        for(let i = 1; i < array.length; i++){
+            //blank variable will become the function call when result was the seed
+            result = func(result, array[i], i, array)
+        }
+    }else{//it has a seed
+        //blank variable is the seed
+        result = seed;
+        //loop through array for index for seed
+            for(let i = 0; i < array.length; i++){
+                //blank variable will become the function call when result was the seed
+                result = func(result, array[i], i, array)
+        }
+    }
+    return result;
+};
 
 /** _.extend
 * Arguments:
@@ -439,6 +543,13 @@ _.map = function(collection, func){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function(object1, object2, def={}){
+    //use Object.assign to add to first object
+    let obj = Object.assign(object1, object2, def)
+    return obj,
+}
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
