@@ -7,7 +7,7 @@
 4) Kill terminal by clicking reycle bin icon
 5) Reopen terminal
 6) In terminal, type => sudo apt-get install subversion
-7) In terminal, type => 
+7) In terminal, type => npm install -g opspark
 8) In terminal, type => os install
 9) Select Bootcamp session from dropdown
 10) Select project to install

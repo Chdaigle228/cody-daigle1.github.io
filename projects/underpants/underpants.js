@@ -48,23 +48,23 @@ _.identity = function(value){
 
 _.typeOf = function(value){
     if(Array.isArray(value)){
-        return "array"
+        return "array";
     }else if(typeof(value) === "string"){
-        return "string";
+        return "string";;
     }else if(typeof(value) === typeof(true)){
-        return "boolean"
+        return "boolean";
     } else if(typeof(value) === typeof(4)){
-        return "number"
+        return "number";
     } else if(value === null){
-        return "null"
+        return "null";
     } else if(typeof(value) === typeof notavalue){
-        return "undefined"
+        return "undefined";
     } else if(typeof value === typeof function (){} ){
         return "function";
     } else if(typeof value === typeof {}){
-        return 'object'
+        return 'object';
     }
-    return value
+    return value;
 }
 
 
@@ -162,6 +162,14 @@ _.last = function(array, num){
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function(array, value){
+    for(let i = 0; i < array.length; i++){
+        if(value === array[i]){
+            return array[i].length
+        }
+    }
+    return -1
+}
 
 /** _.contains
 * Arguments:
@@ -177,6 +185,11 @@ _.last = function(array, num){
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+
+_.contains = function(array, value){
+        //using ternary determin if array has the input value
+       return array.includes(value) ? true : false;
+}
 
 
 /** _.each
@@ -220,6 +233,11 @@ _.each = function(collection, func){
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function(array){
+    //use set to return new array without dups
+   var noDup = [...new Set(array)]
+   return noDup;
+}
 
 /** _.filter
 * Arguments:
@@ -309,6 +327,26 @@ _.partition = function(array, func){
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
+
+_.map = function(collection, func){
+    //store saved values
+    var bank = [];
+    //check if array
+    if(Array.isArray(collection) === true){
+        //loop through array
+        for(let i = 0; i < collection.length; i++){
+            //push function into new array
+            bank.push(func(collection[i], i, collection));
+        }//else it's an object
+    } else{
+        //iterate through object
+    for(var key in collection){
+        //push function into new array
+        bank.push(func(collection[key], key, collection));
+        }
+    }//return new array
+    return bank;
+}
 
 
 /** _.pluck
