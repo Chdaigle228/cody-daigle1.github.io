@@ -395,7 +395,7 @@ var plucked = array.map(function(arr){
 
 _.every = function(collection, func){
          if(Array.isArray(collection)){
-            //check if noi function passed in
+            //check if no function passed in
             if(func === undefined){ //<-- meaning it has nothing passed into it
                 for(let i = 0; i < collection.length; i++){
                     if(!collection[i]){ //check if NOT truthy
@@ -507,27 +507,28 @@ _.some = function(collection, func){
 */
 
 _.reduce = function(array, func, seed){
+    //declare a variable to store the seed/result
     var result;
     //check if seed is defined
     if(seed === undefined){
         //force seed to default to 0 index
         result = array[0];
-        //loop through array for indexs
-        for(let i = 1; i < array.length; i++){
-            //blank variable will become the function call when result was the seed
-            result = func(result, array[i], i, array)
+            //loop through array for indexs starting at 1 index
+            for(let i = 1; i < array.length; i++){
+                //var result will is reassigned to the func call and passed in the seed(result) as the prev value
+                result = func(result, array[i], i, array);
         }
     }else{//it has a seed
         //blank variable is the seed
         result = seed;
-        //loop through array for index for seed
+            //loop through array for index for seed
             for(let i = 0; i < array.length; i++){
-                //blank variable will become the function call when result was the seed
-                result = func(result, array[i], i, array)
+                //var result will is reassigned to the func call and passed in the seed(result) as the prev value
+                result = func(result, array[i], i, array);
         }
     }
     return result;
-};
+}
 
 /** _.extend
 * Arguments:
@@ -547,7 +548,7 @@ _.reduce = function(array, func, seed){
 _.extend = function(object1, object2, def={}){
     //use Object.assign to add to first object
     let obj = Object.assign(object1, object2, def)
-    return obj,
+    return obj
 }
 
 

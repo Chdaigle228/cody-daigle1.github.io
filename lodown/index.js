@@ -11,7 +11,6 @@ function identity(value){
     //return value unchanged
     return value;
 };
-
 module.exports.identity = identity;
 
 /**
@@ -19,7 +18,6 @@ module.exports.identity = identity;
  * @param {Any value}: function takes in any value
  * @returns {string}: Function returns input value datatype as a string 
  */
-
 
 function typeOf(value){
     if(Array.isArray(value)){
@@ -42,7 +40,6 @@ function typeOf(value){
     return value;
 }
 module.exports.typeOf = typeOf;
-
 
 /**
  * first: Designed to return first items in an array
@@ -104,7 +101,7 @@ module.exports.last = last;
  * indexOf: Designed to return the index of <array> that is the first occurrance of <value>
  * @param {Array}: Function takes in any array
  * @param {Value}: Function takes in a value
- * @returns {Index}: Function returns first occurrance of the input value || -1 if array is not an array
+ * @returns {Number}: Function returns the index of the input value || -1 if array is not an array
  */
 
 function indexOf(array, value){
@@ -118,7 +115,7 @@ function indexOf(array, value){
 module.exports.indexOf = indexOf;
 
 /**
- * contains: Designed to return truthy or falsey dependant upon it exists in an array
+ * contains: Designed to return truthy or falsey dependant upon if it exists in an array
  * @param {Array}: Function takes in any array
  * @param {value}: Function takes in a value
  * @returns {Boolean}: Function returns true if array contains the value, false otherwise
@@ -132,12 +129,12 @@ module.exports.contains = contains;
 
 /**
  * each: Designed to loop over a collection, Array or Object, and applies the 
- * action Function to each value in the collection.
- * 
+ * action Function to each value in the collection. 
  * @param {Array or Object} collection: The collection over which to iterate.
  * @param {Function} action: The Function to be applied to each value in the 
  * collection
  */
+
 function each(collection, action) {
     if(Array.isArray(collection)) {
         for(var i = 0; i < collection.length; i++) {
@@ -158,28 +155,19 @@ module.exports.each = each;
  */
 
 function unique(array){
-    //use set to return new array without dups
-   var noDup = [...new Set(array)]
-   return noDup;
+    const noDup = array.filter((element, index) => {
+        return array.indexOf(element) === index;
+    });
+    return noDup
 }
 module.exports.unique = unique;
 
-/** _.filter
-* Arguments:
-*   1) An array
-*   2) A function
-* Objectives:
-*   1) call <function> for each element in <array> passing the arguments:
-*      the element, it's index, <array>
-*   2) return a new array of elements for which calling <function> returned true
-* Edge Cases:
-*   1) What if <function> returns something other than true or false?
-* Examples:
-*   _.filter([1,2,3,4,5], function(x){return x%2 === 0}) -> [2,4]
-* Extra Credit:
-*   use _.each in your implementation
-*/
-
+/**
+ * filter: Designed to return a new array of elements for which calling <function> returned true
+ * @param {Array}: Function takes in any array
+ * @param {Function}: callbackfn returns new array with truthy elements
+ * @returns {Array}: Copy of array with the truthy elements
+ */
 
 function filter(array, func){
     var arr = [];
@@ -190,18 +178,12 @@ function filter(array, func){
 }
 module.exports.filter = filter;
 
-/** _.reject
-* Arguments:
-*   1) An array
-*   2) A function
-* Objectives:
-*   1) call <function> for each element in <array> passing the arguments:
-*      the element, it's index, <array>
-*   2) return a new array of elements for which calling <function> returned false
-*   3) This is the logical inverse if _.filter()
-* Examples:
-*   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
-*/
+/**
+ * reject: Designed to return a new array of elements for which calling <function> returned false. The logical inverse of filter()
+ * @param {Array}: Function takes in any array
+ * @param {Function}: Function takes in a callbackfn
+ * @returns {Array}: Function returns new array with falsey elements
+ */
 
 function reject(array, func){
     var arr = [];
@@ -212,24 +194,12 @@ function reject(array, func){
 }
 module.exports.reject = reject;
 
-/** _.partition
-* Arguments:
-*   1) An array
-*   2) A function
-* Objectives:
-*   1) Call <function> for each element in <array> passing it the arguments:
-*       element, key, <array>
-*   2) Return an array that is made up of 2 sub arrays:
-*       0) An array that contains all the values for which <function> returned something truthy
-*       1) An array that contains all the values for which <function> returned something falsy
-* Edge Cases:
-*   1) This is going to return an array of arrays.
-* Examples:
-*   _.partition([1,2,3,4,5], function(element,index,arr){
-*     return element % 2 === 0;
-*   }); -> [[2,4],[1,3,5]]
-}
-*/
+/**
+ * partition: Designed to separate truthy and falsey items within an array and combine them as sub arrays within an array
+ * @param {Array}: Function takes in any array
+ * @param {Function}: Function takes in a callbackfn
+ * @returns {Array}: Function returns new array with a falsey elements array & truthy elements array inside, separated.
+ */
 
 function partition(array, func){
     var truthy = [];
@@ -240,21 +210,12 @@ function partition(array, func){
 }
 module.exports.partition = partition;
 
-/** _.map
-* Arguments:
-*   1) A collection
-*   2) a function
-* Objectives:
-*   1) call <function> for each element in <collection> passing the arguments:
-*        if <collection> is an array:
-*            the element, it's index, <collection>
-*        if <collection> is an object:
-*            the value, it's key, <collection>
-*   2) save the return value of each <function> call in a new array
-*   3) return the new array
-* Examples:
-*   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
-*/
+/**
+ * map: Designed to iterate through collection(s) elements and copy items into a new array
+ * @param {Collection}: Function takes in any array/object
+ * @param {Function}: Function takes in a callbackfn
+ * @returns {Array}: Function returns a copy of the collection as a new array
+ */
 
 function map(collection, func){
     //store saved values
@@ -276,3 +237,151 @@ function map(collection, func){
     return bank;
 }
 module.exports.map = map;
+
+/**
+ * pluck: Designed to iterate through an array of objects for properties
+ * @param {Array of Objects}: Function takes in any array of objects
+ * @param {Property}: Resemebles the property values during the iteration
+ * @returns {Array}: Function returns new array with al the values of each property in an array
+ */
+
+_.pluck = function(array, prop){
+var plucked = array.map(function(arr){
+    return arr[prop]
+    })
+    return plucked
+}
+module.exports.pluck = pluck;
+
+/**
+ * every: Designed to iterate through a collection for truthy/falsey elements
+ * @param {Collection}: Function takes in any array/object
+ * @param {Function}: Function takes in a callbackfn
+ * @returns {Boolean}: Function returns true if all elements are truthy, but false if any one returns falsey
+ */
+
+_.every = function(collection, func){
+         if(Array.isArray(collection)){
+            //check if noi function passed in
+            if(func === undefined){ //<-- meaning it has nothing passed into it
+                for(let i = 0; i < collection.length; i++){
+                    if(!collection[i]){ //check if NOT truthy
+                        return false;
+                    }
+                }
+            }else{
+                for(let i = 0; i < collection.length; i++){
+                    //check if result of invoking func is truethy/falsey\
+                    if(func(collection[i], i, collection) === false){
+                        return false;
+                    }
+                }
+            }
+            //else it's an object
+        } else{ 
+            if(Array.isArray(collection)){
+                for(let i = 0; i < collection.length; i++){
+                    if(func(collection[i], i, collection) === false){
+                        return false;
+                    }
+                }
+            } else{
+                for(let key in collection){
+                    if(func(collection[key], key, collection) === false){
+                        return false;
+                }
+            }
+        }
+    }
+    return true;
+    
+}
+module.exports.every = every;
+
+/**
+ * some: Designed to iterate through a collection for any truthy element. Direct inverse of every()
+ * @param {Collection}: Function takes in any array/object
+ * @param {Function}: Function takes in a callbackfn
+ * @returns {Boolean}: Function returns true if at least one element is truthy, otherwise false if none are truthy
+ */
+
+_.some = function(collection, func){
+    //call func if its an array
+    if(func === undefined ){
+        if(Array.isArray(collection)){
+            for(let i = 0; i < collection.length; i++){
+                if(collection[i] === true){
+                    return true;
+                }
+            }
+        } else {
+            for(let key in collection){
+                if(collection[key] === true){
+                    return true;
+                }
+            }
+        }
+    } else{ 
+        if(Array.isArray(collection)){
+            for(let i = 0; i < collection.length; i++){
+                if(func(collection[i], i, collection) === true){
+                    return true;
+                }
+            }
+        } else{
+            for(let key in collection){
+                if(func(collection[key], key, collection) === true){
+                    return true;
+                }
+            }
+        }
+    }
+    
+    return false;
+}
+module.exports.some = some;
+/**
+ * reduce: Designed to iterate through an array and return an accumulated value
+ * @param {Array}: Function takes in any array
+ * @param {Function}: Function takes in a callbackfn
+ * @param {Seed}: Function takes in a seed valey for callbackfn
+ * @returns {Array}: Function returns the accumulated element per all indexs
+ */
+
+_.reduce = function(array, func, seed){
+    var result;
+    //check if seed is defined
+    if(seed === undefined){
+        //force seed to default to 0 index
+        result = array[0];
+        //loop through array for indexs starting at index 1
+        for(let i = 1; i < array.length; i++){
+            //blank variable will become the function call when result was the seed
+            result = func(result, array[i], i, array)
+        }
+    }else{//it has a seed
+        //blank variable is the seed
+        result = seed;
+        //loop through array for index for seed
+            for(let i = 0; i < array.length; i++){
+                //blank variable will become the function call when result was the seed
+                result = func(result, array[i], i, array)
+        }
+    }
+    return result;
+};
+module.exports.reduce = reduce;
+/**
+ * extend: Designed to add iterables into each other, by the order they are passed in
+ * @param {Object}: Function takes in any object
+ * @param {Object}: Function takes in a second object
+ * @param {Object}: Takes in an empty object
+ * @returns {Array}: Function returns new array with a falsey elements array & truthy elements array inside, separated.
+ */
+
+_.extend = function(object1, object2, def={}){
+    //use Object.assign to add to first object
+    let obj = Object.assign(object1, object2, def)
+    return obj
+}
+module.exports.extend = extend;
