@@ -3,7 +3,8 @@
 'use strict';
 
 var customers = require('./data/customers.json');
-var _ = require(/* Replace this with the name of your lodown! */);
+var _ = require('underbar');
+const { pullAll, pull } = require('lodash');
 
 /**
  * 1. Import your lodown module using the require() method,
@@ -16,32 +17,98 @@ var _ = require(/* Replace this with the name of your lodown! */);
  *
  * 4. To test your work, run the following command in your terminal:
  *
- *    npm start --prefix ./<YOUR_GITHUB_FOLDER/projects/let-s-get-functional
+ *    npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+ * 
+ *      Directory: cd projects/let-s-get-functional
  *
  *    IMPORTANT: Make sure you replace <YOUR_GITHUB_FOLDER with your actual github folder name that is in your workspace.
  */
 
 var maleCount = function(array) {
+    let males = array.filter((customer) => {
+        return customer.gender === 'male'
+    });
+    return males.length
+};
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+var femaleCount = function(array){
+    let females = _.reduce(array, function(acc, curr){
+        if(curr.gender === 'female'){
+            acc += 1;
+        }
+        return acc;
+    }, 0)
+    return females;
+}
 
+
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+var oldestCustomer = function(array){  //reduce with no seed value
+    var old = array.reduce((acc, curr) => {
+        if(curr.age > acc.age){
+            return curr;
+        } else {
+            return acc;
+        }
+    });
+    return old.name
+}
+
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+var youngestCustomer = function(array){ //reduce with no seed value 
+    var kid = array.reduce((acc, curr) => {
+        if(curr.age < acc.age){
+            return curr;
+        } else {
+            return acc;
+        }
+    });
+    return kid.name
+} 
+
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+var averageBalance = function(array){
+    //use reduce method to turn values into one element
+    let avg = array.reduce((acc, curr) =>{
+    //remove symbols and quotes
+    let rep = curr.balance.replace(/['$',]/g, "");
+    //account for decimal with parseFLoat
+    let parse = parseFloat(rep);
+    //return the accumulator with the parsed number
+    return acc + parse;
+    }, 0)
+    return avg / array.length;
 };
 
-var femaleCount;
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+var firstLetterCount = function(array, letter){
+    let names = array.reduce((acc, curr) =>{
+        //declare new variable for curr
+        let first = curr.name.toUpperCase().startsWith(letter.toUpperCase());
+        //return acc + new variable to incriment
+           return acc + first
+           //seed of 0
+    }, 0);
+    //return function
+    return names
+};
 
-var oldestCustomer;
+//Find how many friends of a given customer have names that start with a given letter
+var friendFirstLetterCount = function(array, customer, letter){
+let cust = array.reduce((acc, curr) => {
+    
+})
+}
 
-var youngestCustomer;
-
-var averageBalance;
-
-var firstLetterCount;
-
-var friendFirstLetterCount;
-
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
 var friendsCount;
 
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
 var topThreeTags;
 
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
 var genderCount;
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
