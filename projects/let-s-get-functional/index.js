@@ -93,21 +93,93 @@ var firstLetterCount = function(array, letter){
     return names
 };
 
-//Find how many friends of a given customer have names that start with a given letter
-var friendFirstLetterCount = function(array, customer, letter){
-let cust = array.reduce((acc, curr) => {
-    
-})
+//npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
+function friendFirstLetterCount(array, customer, letter) {
+  //filter through the customers and match names
+  let filterCustomers = array.filter(person => person.name === customer)[0];
+  if (filterCustomers === false) {
+    return 0;
+  }  //filter through friends
+ let allFriends = filterCustomers['friends'].filter(friend => friend['name'].toUpperCase().startsWith(letter.toUpperCase()));
+ return allFriends.length
 }
 
+//Find the customers' names that have a given customer's name in their friends list
 //npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
-var friendsCount;
+var friendsCount = function(array, name){
+    //create name collection becuase can't figure out high order functiuon
+    let isFriends = [];
+    //loop over customers array of objects the old school way
+    for(var i = 0; i < array.length; i++){
+      //loop over friends array of objects in customers array of objects
+      for(var f = 0; f < array[i].friends.length; f++){
+        //determine if customer is friends with other customers
+        if(array[i].friends[f].name === name){
+          //push customer's name into names array
+          isFriends.push(array[i].name);
+        }
+      }
+    }
+    return isFriends;
+  }
 
 //npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
-var topThreeTags;
+var topThreeTags = function(array) {
+    // collect every tag into one location
+    let tag = [];
+    //loop over customers array of objects
+    for (let i = 0; i < array.length; i++) {
+      //loop through customer's tags
+      for (let r = 0; r < array[i].tags.length; r++) {
+        //current tag at each iteration pushed to []
+        tag.push(array[i].tags[r]);
+      }
+    }
+    //create tag variable
+    let topTags = {}; //will have every tag every time it appears
+    //iterate through all tags
+    //console.log(topTags);
+  
+    for (let i = 0; i < tag.length; i++) {
+      //determine if the current tag already exists in tag
+      if (topTags[tag[i]]) {
+        topTags[tag[i]]++;
+      } else { //else it does not
+        topTags[tag[i]] = 1;
+      }
+      //create new array for sub arrays
+    } var tagsCount = [];
+    for (var key in topTags) {
+      tagsCount.push([key, topTags[key]]);
+    } var final = tagsCount.sort((a, b) => {
+      return b[1] - a[1]
+    });
+    var done = [];
+    for (var q = 0; q < 3; q++) {
+      done.push(final[q][0]);
+    }
+    return done;
+  }
 
 //npm start --prefix ./cody-daigle1.github.io/projects/let-s-get-functional
-var genderCount;
+var genderCount = function(array) {
+    var sex = {
+      male: 0,
+      female: 0,
+      'non-binary': 0
+    };
+    _.reduce(array, function(acc, curr) {
+      if (curr.gender === 'male') {
+        sex.male += 1;
+      } else if (curr.gender === 'female') {
+        sex.female += 1;
+      } else {
+        sex['non-binary'] += 1;
+      }
+    }, 0);
+  
+    return sex;
+  }
 
 
 //////////////////////////////////////////////////////////////////////
