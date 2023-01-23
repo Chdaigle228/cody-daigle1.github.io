@@ -5,11 +5,23 @@
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5);  // 120
 var factorial = function(n) {
+  //base
+  if (n < 0){
+    return null;
+  }if (n === 0 || n === 1){
+   return 1;
+  }
+  return n * factorial(n-1);
 };
 
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
+let sum = function(array) {
+  let arr = array.length - 1;
+  if (arr < 0){
+ return 0;
+  }
+  return array[arr] + sum(array.slice(0, arr));
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
@@ -19,18 +31,83 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  //base
+  if(n === 0){
+    return true;
+  }else if(n === 1){
+    return false
+  }else if(n < 0){
+    return isEven(-n)
+  }
+  //recursion
+    return isEven(n - 2); 
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  //base
+  if(n === 0){
+    return 0;
+  }
+  //recursion
+  if(n < 0){
+    return n + 1 + sumBelow(n + 1);
+  }
+  return n - 1 + sumBelow(n - 1);
+  
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
-};
+var range = function(x, y){
+if(x > y){
+  let list = range(y, x -1);
+  list.push(x - 1);
+  return list.reverse()
+}
+if (y - x === 0 || y - x === 1){
+  return [];
+}
+if(y -x === 2){
+  return[x+1];
+}
+let list = range(x, y-1);
+list.push(y-1);
+return list
+}
+//var range = function(x, y, mt = []){
+// //base
+// //check if smalled number is the same as bigger
+//   if(x === y){
+//     //return an empty parameter
+//     return mt;
+//     //check if x greater less than y
+//   }if (x > y){
+//     //if yes then check distance from x to y
+//       if(x - 1 === y){
+//         //return empty parameter
+//         return mt;
+//         //else push to default parameter
+//     } else {
+//       mt.push(x - 1);
+//       //return smaller number - 1, bigger number, default parmeter
+//     return range(x - 1, y, mt);
+//   }
+// //recursion
+// //check if x is smaller thasn y
+// } if (x < y){
+//   //check range of x and y
+//     if(x + 1 === y){
+//       return mt;
+//     }else{
+//       mt.push(x + 1);
+//       return range(x + 1, y, mt);
+//     }
+//   }
+// }
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -38,6 +115,11 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+if(exp < 0)
+  return exponent(base, exp + 1) / base
+  else if(exp === 0) return 1
+  else
+  return base * exponent(base, exp - 1)
 };
 
 // 8. Determine if a number is a power of two.
@@ -45,6 +127,12 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n === 0) return false;
+  if (n === 1) return true;
+  if (n%2 !== 0) {
+    return false;
+  }
+  return powerOfTwo(n/2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
@@ -242,8 +330,8 @@ var mergeSort = function(array) {
 // DON'T REMOVE THIS CODE -----------
 //-----------------------------------
 
-if ((typeof process !== 'undefined') &&
-  (typeof process.versions.node !== 'undefined')) {
+if ((typeof process !== 'unmtined') &&
+  (typeof process.versions.node !== 'unmtined')) {
 
   /**
    * Due to some node-related issues with spying on recursive functions,
