@@ -77,36 +77,6 @@ let list = range(x, y-1);
 list.push(y-1);
 return list
 }
-//var range = function(x, y, mt = []){
-// //base
-// //check if smalled number is the same as bigger
-//   if(x === y){
-//     //return an empty parameter
-//     return mt;
-//     //check if x greater less than y
-//   }if (x > y){
-//     //if yes then check distance from x to y
-//       if(x - 1 === y){
-//         //return empty parameter
-//         return mt;
-//         //else push to default parameter
-//     } else {
-//       mt.push(x - 1);
-//       //return smaller number - 1, bigger number, default parmeter
-//     return range(x - 1, y, mt);
-//   }
-// //recursion
-// //check if x is smaller thasn y
-// } if (x < y){
-//   //check range of x and y
-//     if(x + 1 === y){
-//       return mt;
-//     }else{
-//       mt.push(x + 1);
-//       return range(x + 1, y, mt);
-//     }
-//   }
-// }
 
 
 // 7. Compute the exponent of a number.
@@ -127,20 +97,35 @@ if(exp < 0)
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  //base
   if (n === 0) return false;
   if (n === 1) return true;
-  if (n%2 !== 0) {
-    return false;
-  }
+  if (n%2 !== 0) return false;
+  //recursion
+  
   return powerOfTwo(n/2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string) {
+  //base
+  //check if string length is 0. Return the string
+if(string.length === 0) return string;
+  //recursion
+  //recursive call(string substring at index one) plus the first character
+  return reverse(string.substring(1)) + string.charAt(0);
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  //base
+  string = string.replace(/\W+/g, '')
+   //should return boolean
+  //check if string has a length
+  if(string.charAt(0).toLowerCase() !== string[string.length - 1].toLowerCase()) return false;
+  if(string.length === 0 || string.length === 1) return true;
+  //recursion
+  return palindrome(string.substring(1, string.length - 1))
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -155,11 +140,23 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
+  if (y === 0) return 0
+  if(x === 0) return 0;
+  if (y === 1) return x;
+  if (y < 0) return -x + multiply(x, y+1)
+  if (y > 0) return x + multiply(x, y-1)
+
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
 var divide = function(x, y) {
+  // if (x === 0) return 0;
+  // if (x === y) return 1;
+  // if (x < y) return 0;
+  // if (y < 0) return divide(x-y, y) + 1
+  // if (y > 0) return divide(x+y, -y) + 1
+
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
@@ -176,15 +173,30 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  //base
+  if (str1.length === 0 && str2.length === 0) return true;
+  //recursion
+ if (str1[0] !== str2[0]) return false;
+  return compareStr(str1.substring(1), str2.substring(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, def=[]) {
+//base
+if(str.length === 0) return def;
+//recursion
+if(str.length > 0)
+def.push(str[0])
+return createArray(str.slice(1), def)
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function(array) {
+  if (array.length === 1) return [array[0]];
+  let addToArray = reverseArr(array.slice(1, array.length));
+  addToArray.push(array[0]);
+  return addToArray
 };
 
 // 18. Create a new array with a given value and length.
