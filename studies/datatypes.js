@@ -15,13 +15,14 @@
            Console.log(true) //<- will log true to the console 
 //      NaN: Not a Number
            console.log(Math.sqrt(-1)) //<- will log 'NaN' to the console.  
-//      null: No value, absence of an object. - Often intentional. Unlike other languages, JS is considered an object. Weird.          
+//      null: No value, absence of an object. - Often intentional. Unlike other languages, 
+//      in JS it is considered an object. Weird.          
 //      undefined: No value, not initialized - indicates an absence of value          
             return; //<- implicitly returns 'undefined'
-//      Then there are some numerical datatypes, like NaN, but are 'Mathematical' types.
-//      These are inifinty and -infinity. Inifinity is reached when a number exceeds the 
-//      upper limit for a number, while -infinity is the lower limit
- /* 
+/**  Then there are some numerical datatypes, like NaN, but are 'Mathematical' types.
+ *   These are inifinty and -infinity. Inifinity is reached when a number exceeds the 
+ *   upper limit for a number, while -infinity is the lower limit
+ * 
  *  These datatypes are immutable and do not hold, combine, or collect other values and can only return simple values.
  *  Mostly can be identified with the typeOf operator, besides null. Simple Datatypes are copy-by-value.
  *  Copy-by-value means that a value sends a copy of the data stored in the variable that is specified.
